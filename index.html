@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Sudu Iri ❤️ | From Buruwa</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --deep-blue: #1e3c72;
+            --royal-blue: #2a5298;
+            --light-pink: #ffdde1;
+            --hot-pink: #ff6b9d;
+            --coral: #feca57;
+            --white: #ffffff;
+            --glass-white: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.25);
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            --light-blue: #87CEEB;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 700; }
+
+        /* ==========================================
+           VIDEO INTRO OVERLAY STYLES
+           ========================================== */
+        #video-intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 99998; /* Just below password overlay */
+            display: none; /* Hidden by default */
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 1.5s ease-out;
+        }
+
+        #intro-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* PASSWORD OVERLAY STYLES */
+        #password-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .password-container {
+            background: var(--glass-white);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            padding: 3rem;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .password-container h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .password-container p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .password-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .password-input:focus {
+            border-color: #ff6b9d;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .password-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #ff6b9d 0%, #feca57 100%);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .password-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 157, 0.4);
+        }
+
+        .error-message {
+            color: #ff6b9d;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .error-message.show {
+            opacity: 1;
+        }
+
+        .heart-lock {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: heartBeat 1.5s ease-in-out infinite;
+        }
+
+        /* Floating Hearts Background */
+        .hearts-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -100px;
+            background: transparent;
+            animation: floatUp linear infinite;
+            opacity: 0;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            left: 10px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        .heart:nth-child(1) { left: 10%; width: 20px; height: 20px; animation-duration: 8s; animation-delay: 0s; }
+        .heart:nth-child(2) { left: 20%; width: 15px; height: 15px; animation-duration: 10s; animation-delay: 2s; background: rgba(255, 107, 157, 0.6); }
+        .heart:nth-child(3) { left: 30%; width: 25px; height: 25px; animation-duration: 12s; animation-delay: 4s; }
+        .heart:nth-child(4) { left: 40%; width: 18px; height: 18px; animation-duration: 9s; animation-delay: 1s; background: rgba(255, 255, 255, 0.4); }
+        .heart:nth-child(5) { left: 50%; width: 22px; height: 22px; animation-duration: 11s; animation-delay: 3s; }
+        .heart:nth-child(6) { left: 60%; width: 16px; height: 16px; animation-duration: 13s; animation-delay: 5s; background: rgba(255, 200, 200, 0.7); }
+        .heart:nth-child(7) { left: 70%; width: 24px; height: 24px; animation-duration: 7s; animation-delay: 2s; }
+        .heart:nth-child(8) { left: 80%; width: 19px; height: 19px; animation-duration: 14s; animation-delay: 4s; }
+        .heart:nth-child(9) { left: 90%; width: 21px; height: 21px; animation-duration: 10s; animation-delay: 6s; background: rgba(255, 150, 200, 0.5); }
+        .heart:nth-child(10) { left: 15%; width: 17px; height: 17px; animation-duration: 9s; animation-delay: 7s; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg) scale(0); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-120vh) rotate(360deg) scale(1.5); opacity: 0; }
+        }
+
+        .glass-card {
+            background: var(--glass-white);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, #ffdde1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(255, 221, 225, 0.8)); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '❤️';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .nav-links a:hover::after {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+            animation: heartbeat 1s infinite;
+        }
+
+        .nav-links a:hover {
+            color: #ffdde1;
+            text-shadow: 0 0 10px rgba(255, 221, 225, 0.8);
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.3); }
+        }
+
+        .surprise-btn {
+            background: linear-gradient(135deg, #87CEEB 0%, #ADD8E6 100%);
+            color: #1e3c72;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(135, 206, 235, 0.4);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .surprise-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(135, 206, 235, 0.6);
+        }
+
+        .menu-toggle { display: none; }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem;
+            overflow: hidden;
+        }
+        .hero-content { text-align: center; z-index: 10; position: relative; }
+        .hero-badge {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            animation: float 3s ease-in-out infinite;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .hero h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); text-shadow: 0 0 30px rgba(255, 255, 255, 0.5); }
+            50% { transform: scale(1.02); text-shadow: 0 0 50px rgba(255, 107, 157, 0.8); }
+        }
+        .hero h1 .heart-beat {
+            display: inline-block;
+            animation: heartBeat 1.5s ease-in-out infinite;
+            color: #ff6b9d;
+        }
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            10% { transform: scale(1.3); }
+            20% { transform: scale(1); }
+            30% { transform: scale(1.3); }
+            40% { transform: scale(1); }
+        }
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 300;
+            opacity: 0.95;
+            margin-bottom: 3rem;
+            font-style: italic;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-btn {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, #ff6b9d 0%, #feca57 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: float 4s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+        .hero-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 107, 157, 0.6);
+        }
+        .deco-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        .deco-circle:nth-child(1) { width: 300px; height: 300px; top: 10%; left: -100px; }
+        .deco-circle:nth-child(2) { width: 200px; height: 200px; bottom: 10%; right: -50px; background: rgba(255, 107, 157, 0.2); animation-delay: 2s; }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.6; }
+        }
+
+        section { padding: 6rem 5%; position: relative; z-index: 10; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, #fff, #ff6b9d);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+            box-shadow: 0 0 20px rgba(255, 107, 157, 0.8);
+        }
+
+        .love-story { background: rgba(0, 0, 0, 0.1); }
+        .story-card { max-width: 800px; margin: 0 auto; padding: 4rem; text-align: center; animation: floatingCard 6s ease-in-out infinite; }
+        @keyframes floatingCard {
+            0%, 100% { transform: translateY(0) rotateX(0deg); }
+            50% { transform: translateY(-20px) rotateX(2deg); }
+        }
+        .story-text { font-size: 1.2rem; line-height: 2; color: rgba(255, 255, 255, 0.95); font-family: 'Playfair Display', serif; font-style: italic; }
+        .story-text::first-letter { font-size: 4rem; float: left; line-height: 1; margin-right: 0.5rem; color: #ffdde1; text-shadow: 0 0 20px rgba(255, 221, 225, 0.8); }
+
+        /* ❤️ PHOTO UPLOAD LOCATION 7: About/Story Section Photo (Optional) */
+        .about-image {
+            width: 100%;
+            max-width: 500px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin: 2rem auto;
+            display: block;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .gallery { perspective: 1000px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .gallery-item { position: relative; height: 350px; border-radius: 20px; overflow: hidden; transform-style: preserve-3d; transition: all 0.5s ease; cursor: pointer; }
+        .gallery-item:hover { transform: translateY(-10px) rotateX(5deg) rotateY(5deg) scale(1.02); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .gallery-item:hover img { transform: scale(1.2); }
+        .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(30, 60, 114, 0.9), transparent); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; opacity: 0; transition: all 0.4s ease; }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-title { font-size: 1.5rem; transform: translateY(20px); transition: transform 0.4s ease; color: white; }
+        .gallery-item:hover .gallery-title { transform: translateY(0); }
+        .gallery-date { color: #ffdde1; font-size: 0.9rem; transform: translateY(20px); transition: transform 0.4s ease 0.1s; }
+        .gallery-item:hover .gallery-date { transform: translateY(0); }
+
+        .love-message { background: rgba(0, 0, 0, 0.15); text-align: center; }
+        .message-container { max-width: 900px; margin: 0 auto; padding: 4rem 3rem; }
+        .message-text { font-family: 'Playfair Display', serif; font-size: clamp(1.3rem, 3vw, 1.8rem); line-height: 2; color: white; font-style: italic; position: relative; }
+        .message-text::before, .message-text::after { content: '"'; font-size: 4rem; position: absolute; color: rgba(255, 255, 255, 0.3); font-family: Georgia, serif; }
+        .message-text::before { top: -40px; left: -20px; }
+        .message-text::after { bottom: -60px; right: -20px; }
+        .typing-text { border-right: 3px solid #ff6b9d; white-space: nowrap; overflow: hidden; display: inline-block; animation: typing 4s steps(60) 1s forwards, blink 0.7s step-end infinite; max-width: 0; }
+        @keyframes typing { to { max-width: 100%; } }
+        @keyframes blink { 50% { border-color: transparent; } }
+        .signature { margin-top: 3rem; font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #ffdde1; opacity: 0; animation: fadeIn 2s ease 5s forwards; }
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        .nickname-section { min-height: 60vh; display: flex; align-items: center; }
+        .names-container { display: grid; grid-template-columns: 1fr auto 1fr; gap: 3rem; align-items: center; max-width: 1000px; margin: 0 auto; width: 100%; }
+        .name-card { text-align: center; padding: 3rem 2rem; animation: float 6s ease-in-out infinite; }
+        .name-label { font-size: 1rem; text-transform: uppercase; letter-spacing: 3px; opacity: 0.8; margin-bottom: 1rem; }
+        .nickname {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, #ffdde1 50%, #ff6b9d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .emoji { display: block; font-size: 3rem; margin-top: 1rem; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        .connector { position: relative; height: 100px; display: flex; align-items: center; justify-content: center; }
+        .heart-connector { font-size: 4rem; color: #ff6b9d; animation: heartBeat 1.2s infinite, glowHeart 2s infinite alternate; filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.8)); }
+        @keyframes glowHeart { from { filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.8)); } to { filter: drop-shadow(0 0 40px rgba(255, 107, 157, 1)); } }
+        .connector-line { position: absolute; width: 100%; height: 2px; background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5), transparent); animation: linePulse 2s infinite; }
+        @keyframes linePulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+        /* ==========================================
+           BOUQUET SURPRISE SECTION
+           ========================================== */
+        #bouquet-surprise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.8s ease;
+            overflow: hidden;
+        }
+
+        #bouquet-surprise:target {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ❤️ PHOTO UPLOAD LOCATION 8: Black Canvas Background for Bouquet */
+        .bouquet-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* ❤️ Replace 'black-canvas.jpg' with your dark/black photo path */
+            background-image: url('black-canvas.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        /* Light Rays */
+        .light-rays {
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            width: 200%;
+            height: 200%;
+            transform: translateX(-50%);
+            background: conic-gradient(from 0deg, transparent 0deg, rgba(135, 206, 235, 0.1) 20deg, transparent 40deg, rgba(255, 255, 255, 0.1) 60deg, transparent 80deg);
+            animation: rotateRays 20s linear infinite;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        @keyframes rotateRays {
+            from { transform: translateX(-50%) rotate(0deg); }
+            to { transform: translateX(-50%) rotate(360deg); }
+        }
+
+        .close-surprise {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(135, 206, 235, 0.5);
+            border-radius: 50%;
+            color: white;
+            font-size: 2rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .close-surprise:hover {
+            background: rgba(135, 206, 235, 0.3);
+            transform: rotate(90deg);
+            border-color: #87CEEB;
+        }
+
+        .bouquet-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .bouquet-svg {
+            width: 90%;
+            max-width: 900px;
+            height: auto;
+            filter: drop-shadow(0 0 40px rgba(135, 206, 235, 0.4));
+            overflow: visible;
+        }
+
+        /* SVG Animations */
+        .draw-line {
+            fill: transparent;
+            stroke: rgba(255, 255, 255, 0.9);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawPath 2.5s ease forwards;
+        }
+
+        @keyframes drawPath {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .flower-bloom {
+            opacity: 0;
+            transform-origin: center;
+            animation: bloomIn 1.5s ease forwards, gentleSway 6s ease-in-out infinite;
+            transform-box: fill-box;
+        }
+
+        @keyframes bloomIn {
+            0% { 
+                opacity: 0; 
+                transform: scale(0) rotate(-180deg); 
+            }
+            50% {
+                opacity: 1;
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1) rotate(0deg); 
+            }
+        }
+
+        @keyframes gentleSway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        .petal {
+            opacity: 0;
+            animation: petalUnfold 1s ease forwards;
+            transform-origin: bottom center;
+        }
+
+        @keyframes petalUnfold {
+            0% { 
+                opacity: 0; 
+                transform: scale(0) rotate(-45deg); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1) rotate(0deg); 
+            }
+        }
+
+        .leaf-grow {
+            opacity: 0;
+            transform-origin: bottom center;
+            animation: leafGrow 1s ease forwards;
+        }
+
+        @keyframes leafGrow {
+            0% { 
+                opacity: 0; 
+                transform: scale(0) translateY(20px); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1) translateY(0); 
+            }
+        }
+
+        .ring-appear {
+            opacity: 0;
+            animation: ringReveal 2s ease 4s forwards, ringFloat 3s ease-in-out infinite;
+            transform-origin: center;
+            transform-box: fill-box;
+        }
+
+        @keyframes ringReveal {
+            0% { 
+                opacity: 0; 
+                transform: scale(0) rotate(-360deg); 
+            }
+            60% {
+                opacity: 1;
+                transform: scale(1.2) rotate(20deg);
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1) rotate(0deg); 
+            }
+        }
+
+        @keyframes ringFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .sparkle {
+            opacity: 0;
+            animation: sparkleAnim 2s ease-in-out infinite;
+        }
+
+        .sparkle:nth-child(1) { animation-delay: 4.5s; }
+        .sparkle:nth-child(2) { animation-delay: 4.8s; }
+        .sparkle:nth-child(3) { animation-delay: 5.1s; }
+        .sparkle:nth-child(4) { animation-delay: 5.4s; }
+        .sparkle:nth-child(5) { animation-delay: 5.7s; }
+
+        @keyframes sparkleAnim {
+            0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1) rotate(180deg); }
+        }
+
+        .glow-pulse {
+            animation: glowPulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glowPulse {
+            from { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1) drop-shadow(0 0 40px rgba(135, 206, 235, 0.8))); }
+        }
+
+        /* Floating Particles Container */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(135,206,235,0) 70%);
+            border-radius: 50%;
+            animation: particleFloat 10s linear infinite;
+            opacity: 0;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-duration: 8s; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-duration: 12s; animation-delay: 1s; width: 8px; height: 8px; }
+        .particle:nth-child(3) { left: 30%; animation-duration: 9s; animation-delay: 2s; }
+        .particle:nth-child(4) { left: 40%; animation-duration: 11s; animation-delay: 0.5s; width: 4px; height: 4px; }
+        .particle:nth-child(5) { left: 50%; animation-duration: 13s; animation-delay: 3s; }
+        .particle:nth-child(6) { left: 60%; animation-duration: 10s; animation-delay: 1.5s; width: 10px; height: 10px; }
+        .particle:nth-child(7) { left: 70%; animation-duration: 14s; animation-delay: 2.5s; }
+        .particle:nth-child(8) { left: 80%; animation-duration: 9s; animation-delay: 0s; width: 5px; height: 5px; }
+        .particle:nth-child(9) { left: 90%; animation-duration: 11s; animation-delay: 4s; }
+        .particle:nth-child(10) { left: 15%; animation-duration: 15s; animation-delay: 1s; }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Falling Petals */
+        .falling-petals {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 8;
+        }
+
+        .petal-fall {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: linear-gradient(135deg, rgba(135,206,235,0.8), rgba(255,255,255,0.4));
+            border-radius: 150% 0 150% 0;
+            animation: fallDown 12s linear infinite;
+            opacity: 0;
+        }
+
+        .petal-fall:nth-child(1) { left: 5%; animation-delay: 0s; }
+        .petal-fall:nth-child(2) { left: 15%; animation-delay: 3s; background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(135,206,235,0.4)); }
+        .petal-fall:nth-child(3) { left: 25%; animation-delay: 7s; }
+        .petal-fall:nth-child(4) { left: 35%; animation-delay: 2s; background: linear-gradient(135deg, rgba(176,224,230,0.8), rgba(255,255,255,0.4)); }
+        .petal-fall:nth-child(5) { left: 45%; animation-delay: 5s; }
+        .petal-fall:nth-child(6) { left: 55%; animation-delay: 9s; background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(173,216,230,0.4)); }
+        .petal-fall:nth-child(7) { left: 65%; animation-delay: 1s; }
+        .petal-fall:nth-child(8) { left: 75%; animation-delay: 6s; background: linear-gradient(135deg, rgba(135,206,235,0.6), rgba(255,255,255,0.3)); }
+        .petal-fall:nth-child(9) { left: 85%; animation-delay: 4s; }
+        .petal-fall:nth-child(10) { left: 95%; animation-delay: 8s; background: linear-gradient(135deg, rgba(224,247,250,0.8), rgba(255,255,255,0.4)); }
+
+        @keyframes fallDown {
+            0% {
+                transform: translateY(-10vh) rotate(0deg) translateX(0px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            25% {
+                transform: translateY(25vh) rotate(90deg) translateX(20px);
+            }
+            50% {
+                transform: translateY(50vh) rotate(180deg) translateX(-20px);
+            }
+            75% {
+                transform: translateY(75vh) rotate(270deg) translateX(20px);
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg) translateX(0px);
+                opacity: 0;
+            }
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .footer-content { position: relative; z-index: 10; }
+        .footer-text { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: white; margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: rgba(30, 60, 114, 0.98);
+                flex-direction: column;
+                padding: 6rem 2rem 2rem;
+                gap: 2rem;
+                transition: right 0.4s ease;
+                backdrop-filter: blur(10px);
+            }
+            .menu-toggle:checked ~ .nav-links { right: 0; }
+            .names-container { grid-template-columns: 1fr; gap: 2rem; }
+            .connector { transform: rotate(90deg); height: 60px; }
+            section { padding: 4rem 5%; }
+            .typing-text { white-space: normal; border: none; animation: none; max-width: 100%; }
+            .surprise-btn span { display: none; }
+            .surprise-btn::after { content: '💐'; font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- VIDEO INTRO OVERLAY (Added) -->
+    <div id="video-intro-overlay">
+        <video id="intro-video" autoplay sound playsinline>
+            <source src="001.mp4" type="video/mp4">
+            <!-- Fallback message if video fails -->
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- PASSWORD PROTECTION OVERLAY -->
+    <div id="password-overlay">
+        <div class="hearts-container" style="z-index: -1;">
+            <div class="heart"></div><div class="heart"></div><div class="heart"></div>
+            <div class="heart"></div><div class="heart"></div><div class="heart"></div>
+            <div class="heart"></div><div class="heart"></div><div class="heart"></div>
+            <div class="heart"></div>
+        </div>
+        <div class="password-container">
+            <div class="heart-lock">🔒</div>
+            <h2>Welcome My Cuduu</h2>
+            <p>Enter the secret password to unlock our memories</p>
+            <input type="password" class="password-input" id="password-input" placeholder="Enter password..." autocomplete="off">
+            <button class="password-btn" onclick="checkPassword()">Unlock ❤️</button>
+            <div class="error-message" id="error-msg">Incorrect password. Try again, my love.</div>
+        </div>
+    </div>
+
+    <!-- Floating Hearts Background -->
+    <div class="hearts-container">
+        <div class="heart"></div><div class="heart"></div><div class="heart"></div>
+        <div class="heart"></div><div class="heart"></div><div class="heart"></div>
+        <div class="heart"></div><div class="heart"></div><div class="heart"></div>
+        <div class="heart"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <div class="logo">Buruwa ❤️ Sudu Iri</div>
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+            <label for="menu-toggle" class="hamburger">
+                <span></span><span></span><span></span>
+            </label>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#story">Our Story</a></li>
+                <li><a href="#memories">Memories</a></li>
+                <li><a href="#message">My Message</a></li>
+                <li><a href="#us">Us</a></li>
+                <li><a href="#bouquet-surprise" class="surprise-btn"><span>Secret Garden 💐</span></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="deco-circle"></div>
+        <div class="deco-circle"></div>
+        <div class="hero-content">
+            <div class="hero-badge">💝 Valentine's Special 2026 💝</div>
+            <h1>For My Sudu Iri <span class="heart-beat">❤️</span></h1>
+            <p class="hero-subtitle">From your Buruwa, with endless love</p>
+            <a href="#story" class="hero-btn">Explore Our Love ❤️</a>
+        </div>
+    </section>
+
+    <!-- Love Story Section -->
+    <section class="love-story" id="story">
+        <div class="container">
+            <h2 class="section-title">Mine</h2>
+            <div class="glass-card story-card">
+                <p class="story-text">
+                Magen kalin daws tikema huwa ned mokdd karanne kiyla, menna meka thanayi eeee 😌
+                Oya ithim mage,
+1. Sudu iri 🐷
+2. ⁠Sudu iri patiya 😭
+3. ⁠Sassana sudu manika 👀
+4. ⁠Seaayma sessy sudu iri ❤️
+5. ⁠Cudu rattaran 🤍
+6. ⁠Wasthuwa 🥹
+7. ⁠Suwadama suwada suduma sudu sessyma sessy hodama hoda mage cute iri patiya ❤️♾️
+8. ⁠Mage raja rata manike 😌
+
+Mage manika kochchara nm hoda kenekd, oyat dnnw ne sudu eka, oya hrisam sassanayi e witarak nemeyi oyge hithath lassanayi oya harima hodayi, mn dnnwa ne mage sudu manika gana oyata godak dewal krnna puluwan, oya mage sudu ne ithim 😌❤️
+
+Oyge me buruwa oyge life eke onm dekata onama dawasaka onama widihakata oya ekka innaw manike, oyawa mn kawamadakawath atha arinne nh 🫂❤️🥹
+Mage sudu irige sassana thawa thawath wadi wela, suwada thawath wadi wela (mata bella ibinna puluwan wennat one 😌), mage manika cute sassana iriyek wge inna one 
+
+I love u toooo much mage sudu sassana sessy cute sudu iri patiyooooo ❤️♾️
+Mage sudu hodata wada krnn one, mamat konat oha ekka innw ne, api hodaga wada krmu manike 🫂❤️🥹✨
+Ummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+❤️✨♾️💕🥹🐷🫂😗
+              
+                 </p>
+            </div>
+            
+            <!-- ❤️ PHOTO UPLOAD LOCATION 1: Couple Photo in Story Section (Optional) -->
+            <!-- Uncomment the line below if you want to add a photo here -->
+            <!-- <img src="your-couple-photo.jpg" alt="Pamith and Nadewmi" class="about-image"> -->
+        </div>
+    </section>
+
+    <!-- ==========================================
+         MEMORY GALLERY - 12 PHOTOS UPLOAD SECTION
+         ========================================== -->
+    <section class="gallery" id="memories">
+        <div class="container">
+            <h2 class="section-title">Our Precious Moments</h2>
+            <div class="gallery-grid">
+                
+                <!-- ❤️ PHOTO 1: First Meeting -->
+                <div class="gallery-item glass-card">
+                    <img src="002.jpeg" alt="First Meeting">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">First Meeting</h3>
+                        <span class="gallery-date">The day everything changed</span>
+                    </div>
+                </div>
+
+                <!-- ❤️ PHOTO 2: Adventures -->
+                <div class="gallery-item glass-card">
+                    <img src="012.jpeg" alt="Adventures">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Your AI</h3>
+                        <span class="gallery-date">My Favourite in AI</span>
+                    </div>
+                </div>
+
+                <!-- ❤️ PHOTO 3: Laughter/Joy -->
+                <div class="gallery-item glass-card">
+                    <img src="009.jpeg" alt="Laughter">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Endless Laughter</h3>
+                        <span class="gallery-date">Moments of pure joy</span>
+                    </div>
+                </div>
+
+                <!-- ❤️ PHOTO 4: Dreams/Future -->
+                <div class="gallery-item glass-card">
+                    <img src="004.jpeg" alt="Dreams">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Dreaming Together</h3>
+                        <span class="gallery-date">The way we are, according to our nicknames</span>
+                    </div>
+                </div>
+
+                <!-- ❤️ PHOTO 5: Comfort/Cuddling -->
+                <div class="gallery-item glass-card">
+                    <img src="005.jpeg" alt="Comfort">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Safe Haven</h3>
+                        <span class="gallery-date">In your arms is home</span>
+                    </div>
+                </div>
+
+                <!-- ❤️ PHOTO 6: Forever/Romantic -->
+                <div class="gallery-item glass-card">
+                    <img src="007.jpeg" alt="Forever">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Forever & Always</h3>
+                        <span class="gallery-date">Until the end of time</span>
+                    </div>
+                </div>
+
+                <!-- ❤️ PHOTO 7: Date Night -->
+                <div class="gallery-item glass-card">
+                    <img src="006.jpeg" alt="Date Night">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Date Night</h3>
+                        <span class="gallery-date">Just you and me</span>
+                    </div>
+                </div>
+
+                <!-- ❤️ PHOTO 8: Celebrations -->
+                <div class="gallery-item glass-card">
+                    <img src="008.jpeg" alt="Celebrations">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Celebrations</h3>
+                        <span class="gallery-date">Every moment with you is special</span>
+                    </div>
+                </div>
+
+                <!-- ❤️ PHOTO 9: Silly Moments -->
+                <div class="gallery-item glass-card">
+                    <img src="014.jpeg" alt="Silly Moments">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Kiss</h3>
+                        <span class="gallery-date">It felt like magic.</span>
+                    </div>
+                </div>
+
+                <!-- ❤️ PHOTO 10: Sunset/Sunrise -->
+                <div class="gallery-item glass-card">
+                    <img src="010.jpeg" alt="Sunset">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Mine</h3>
+                        <span class="gallery-date">My favourite</span>
+                    </div>
+                </div>
+
+                <!-- ❤️ PHOTO 11: First Trip -->
+                <div class="gallery-item glass-card">
+                    <img src="011.jpeg" alt="First Trip">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">AI US</h3>
+                        <span class="gallery-date">You And Me</span>
+                    </div>
+                </div>
+
+                <!-- ❤️ PHOTO 12: Promise -->
+                <div class="gallery-item glass-card">
+                    <img src="013.jpeg" alt="Promise">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">My Promise</h3>
+                        <span class="gallery-date">I am with you forever</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Love Message Section -->
+    <section class="love-message" id="message">
+        <div class="container">
+            <h2 class="section-title">My Heart Speaks</h2>
+            <div class="glass-card message-container">
+                <p class="message-text">
+                    <span class="typing-text">My dearest Sudu Iri, every beat of my heart whispers your name. You are the poetry I never knew how to write, the melody that plays endlessly in my soul. In your eyes, I found my home; in your heart, I found my peace. I love you beyond words, beyond time, beyond measure. You are my today, my tomorrow, and all of my forevers. Happy Valentine's Day, my love.</span>
+                </p>
+                <div class="signature">Forever Yours,<br><span style="color: #ffdde1; font-size: 2rem;">Buruwa 💕</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nickname Section -->
+    <section class="nickname-section" id="us">
+        <div class="container">
+            <div class="names-container">
+                <div class="name-card glass-card">
+                    <div class="name-label">The Light of My Life</div>
+                    <div class="nickname">Sudu Iri</div>
+                    <span class="emoji">💕</span>
+                </div>
+                <div class="connector">
+                    <div class="connector-line"></div>
+                    <div class="heart-connector">❤️</div>
+                </div>
+                <div class="name-card glass-card">
+                    <div class="name-label">Her Protector</div>
+                    <div class="nickname">Buruwa</div>
+                    <span class="emoji" style="animation-delay: 0.5s;">🐻</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         ULTRA CREATIVE BOUQUET SECTION
+         ========================================== -->
+    <section id="bouquet-surprise">
+        <div class="bouquet-bg"></div>
+        <div class="light-rays"></div>
+      
+        <!-- Floating Particles -->
+        <div class="particles">
+            <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+            <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+            <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+
+        <!-- Falling Petals -->
+        <div class="falling-petals">
+            <div class="petal-fall"></div><div class="petal-fall"></div><div class="petal-fall"></div>
+            <div class="petal-fall"></div><div class="petal-fall"></div><div class="petal-fall"></div>
+            <div class="petal-fall"></div><div class="petal-fall"></div><div class="petal-fall"></div>
+            <div class="petal-fall"></div>
+        </div>
+
+        <a href="#" class="close-surprise">×</a>
+        
+        <div class="bouquet-container">
+            <svg class="bouquet-svg" viewBox="0 0 800 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                    <!-- Gradients -->
+                    <radialGradient id="gradBlue" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:#E1F5FE;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#81D4FA;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#29B6F6;stop-opacity:1" />
+                    </radialGradient>
+                    <radialGradient id="gradWhite" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+                        <stop offset="70%" style="stop-color:#F5F5F5;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#E0E0E0;stop-opacity:1" />
+                    </radialGradient>
+                    <radialGradient id="gradLightBlue" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:#B3E5FC;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#4FC3F7;stop-opacity:1" />
+                    </radialGradient>
+                    <linearGradient id="gradGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#FFF9C4;stop-opacity:1" />
+                        <stop offset="30%" style="stop-color:#FFD700;stop-opacity:1" />
+                        <stop offset="70%" style="stop-color:#FFA000;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#FF8F00;stop-opacity:1" />
+                    </linearGradient>
+                    <filter id="softGlow">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    <filter id="strongGlow">
+                        <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+
+                <!-- Main Stems (Draw First) -->
+                <g style="animation-delay: 0s;">
+                    <path class="draw-line" d="M400,650 Q395,550 400,450 Q405,350 400,280" style="animation-delay: 0s; stroke: #2E7D32; stroke-width: 4;"/>
+                    <path class="draw-line" d="M400,450 Q350,400 330,320" style="animation-delay: 0.2s; stroke: #388E3C; stroke-width: 3;"/>
+                    <path class="draw-line" d="M400,450 Q450,400 470,320" style="animation-delay: 0.4s; stroke: #388E3C; stroke-width: 3;"/>
+                    <path class="draw-line" d="M400,380 Q360,330 340,280" style="animation-delay: 0.6s; stroke: #43A047; stroke-width: 2.5;"/>
+                    <path class="draw-line" d="M400,380 Q440,330 460,280" style="animation-delay: 0.8s; stroke: #43A047; stroke-width: 2.5;"/>
+                    <path class="draw-line" d="M400,300 Q420,260 430,230" style="animation-delay: 1s; stroke: #66BB6A; stroke-width: 2;"/>
+                    <path class="draw-line" d="M400,300 Q380,260 370,230" style="animation-delay: 1.2s; stroke: #66BB6A; stroke-width: 2;"/>
+                </g>
+
+                <!-- Baby's Breath Details -->
+                <g class="flower-bloom" style="animation-delay: 1.5s;">
+                    <circle cx="350" cy="400" r="2" fill="white" opacity="0.8"/>
+                    <circle cx="355" cy="395" r="1.5" fill="white" opacity="0.6"/>
+                    <circle cx="345" cy="405" r="1.5" fill="white" opacity="0.6"/>
+                    <circle cx="450" cy="410" r="2" fill="white" opacity="0.8"/>
+                    <circle cx="445" cy="405" r="1.5" fill="white" opacity="0.6"/>
+                    <circle cx="380" cy="350" r="2" fill="white" opacity="0.7"/>
+                    <circle cx="420" cy="345" r="2" fill="white" opacity="0.7"/>
+                </g>
+
+                <!-- Leaves (Grow Animation) -->
+                <g class="leaf-grow" style="animation-delay: 1.8s;">
+                    <path d="M395,550 Q370,530 360,540 Q375,560 395,555" fill="#2E7D32" opacity="0.9"/>
+                    <path d="M405,550 Q430,530 440,540 Q425,560 405,555" fill="#2E7D32" opacity="0.9"/>
+                </g>
+                <g class="leaf-grow" style="animation-delay: 2s;">
+                    <path d="M330,320 Q310,300 305,310 Q320,325 332,322" fill="#388E3C"/>
+                    <path d="M470,320 Q490,300 495,310 Q480,325 468,322" fill="#388E3C"/>
+                </g>
+                <g class="leaf-grow" style="animation-delay: 2.2s;">
+                    <path d="M340,280 Q320,260 315,270 Q330,285 342,282" fill="#43A047"/>
+                    <path d="M460,280 Q480,260 485,270 Q470,285 458,282" fill="#43A047"/>
+                </g>
+
+                <!-- Flower 1: Center Large Blue Rose -->
+                <g class="flower-bloom" style="animation-delay: 2.5s; transform-origin: 400px 280px;">
+                    <!-- Outer Petals -->
+                    <g class="petal" style="animation-delay: 2.5s;">
+                        <path d="M400,280 C380,260 370,240 400,220 C430,240 420,260 400,280" fill="url(#gradBlue)" filter="url(#softGlow)"/>
+                    </g>
+                    <g class="petal" style="animation-delay: 2.6s;">
+                        <path d="M400,280 C430,270 450,280 460,300 C440,310 420,300 400,280" fill="url(#gradBlue)" filter="url(#softGlow)"/>
+                    </g>
+                    <g class="petal" style="animation-delay: 2.7s;">
+                        <path d="M400,280 C420,310 410,340 400,350 C390,340 380,310 400,280" fill="url(#gradBlue)" filter="url(#softGlow)"/>
+                    </g>
+                    <g class="petal" style="animation-delay: 2.8s;">
+                        <path d="M400,280 C370,300 340,290 340,270 C360,260 380,270 400,280" fill="url(#gradBlue)" filter="url(#softGlow)"/>
+                    </g>
+                    <!-- Inner Petals -->
+                    <g class="petal" style="animation-delay: 2.9s;">
+                        <path d="M400,280 C390,265 395,250 405,245 C415,250 410,265 400,280" fill="#E1F5FE"/>
+                    </g>
+                    <g class="petal" style="animation-delay: 3.0s;">
+                        <path d="M400,280 C415,285 425,295 420,305 C405,300 400,290 400,280" fill="#B3E5FC"/>
+                    </g>
+                    <g class="petal" style="animation-delay: 3.1s;">
+                        <path d="M400,280 C395,295 390,310 400,315 C410,310 405,295 400,280" fill="#E1F5FE"/>
+                    </g>
+                    <g class="petal" style="animation-delay: 3.2s;">
+                        <path d="M400,280 C385,285 375,295 380,305 C395,300 400,290 400,280" fill="#B3E5FC"/>
+                    </g>
+                    <!-- Center -->
+                    <circle cx="400" cy="280" r="12" fill="#FFD700" filter="url(#strongGlow)"/>
+                    <circle cx="400" cy="280" r="8" fill="#FFA000"/>
+                </g>
+
+                <!-- Flower 2: Top Left White Peony -->
+                <g class="flower-bloom" style="animation-delay: 3.0s; transform-origin: 340px 230px;">
+                    <g class="petal" style="animation-delay: 3.0s;">
+                        <path d="M340,230 C320,200 330,170 350,160 C370,170 360,200 340,230" fill="url(#gradWhite)"/>
+                    </g>
+                    <g class="petal" style="animation-delay: 3.1s;">
+                        <path d="M340,230 C370,220 390,230 395,250 C380,265 360,250 340,230" fill="url(#gradWhite)"/>
+                    </g>
+                    <g class="petal" style="animation-delay: 3.2s;">
+                        <path d="M340,230 C350,260 340,290 320,295 C305,285 320,255 340,230" fill="url(#gradWhite)"/>
+                    </g>
+                    <g class="petal" style="animation-delay: 3.3s;">
+                        <path d="M340,230 C310,240 285,230 280,210 C295,195 320,210 340,230" fill="url(#gradWhite)"/>
+                    </g>
+                    <g class="petal" style="animation-delay: 3.4s;">
+                        <path d="M340,230 C330,210 335,190 345,185 C355,190 350,210 340,230" fill="#F5F5F5"/>
+                    </g>
+                    <circle cx="340" cy="230" r="10" fill="#FFF8DC" filter="url(#softGlow)"/>
+                </g>
+
+                <!-- Flower 3: Top Right Light Blue Hydrangea -->
+                <g class="flower-bloom" style="animation-delay: 3.3s; transform-origin: 460px 230px;">
+                    <g class="petal" style="animation-delay: 3.3s;">
+                        <path d="M460,230 C450,200 465,175 480,170 C495,175 480,200 460,230" fill="url(#gradLightBlue)"/>
+                    </g>
+                    <g class="petal" style="animation-delay: 3.4s;">
+                        <path d="M460,230 C490,220 510,235 515,255 C500,270 480,250 460,230" fill="url(#gradLightBlue)"/>
+                    </g>
+                    <g class="petal" style="animation-delay: 3.5s;">
+                        <path d="M460,230 C470,260 460,295 440,300 C425,290 440,255 460,230" fill="url(#gradLightBlue)"/>
+                    </g>
+                    <g class="petal" style="animation-delay: 3.6s;">
+                        <path d="M460,230 C430,240 410,225 405,205 C420,190 440,210 460,230" fill="url(#gradLightBlue)"/>
+                    </g>
+                    <circle cx="460" cy="230" r="15" fill="#E1F5FE" opacity="0.6"/>
+                    <circle cx="460" cy="230" r="8" fill="#81D4FA"/>
+                </g>
+
+                <!-- Flower 4: Left Blue Accent -->
+                <g class="flower-bloom" style="animation-delay: 3.6s; transform-origin: 330px 320px; transform: scale(0.8);">
+                    <circle cx="330" cy="320" r="25" fill="url(#gradBlue)" opacity="0.9"/>
+                    <g class="petal" style="animation-delay: 3.6s;">
+                        <path d="M330,320 L330,295" stroke="#29B6F6" stroke-width="8" stroke-linecap="round"/>
+                        <path d="M330,320 L350,335" stroke="#29B6F6" stroke-width="8" stroke-linecap="round"/>
+                        <path d="M330,320 L310,335" stroke="#29B6F6" stroke-width="8" stroke-linecap="round"/>
+                    </g>
+                    <circle cx="330" cy="320" r="8" fill="white"/>
+                </g>
+
+                <!-- Flower 5: Right White Accent -->
+                <g class="flower-bloom" style="animation-delay: 3.9s; transform-origin: 470px 320px; transform: scale(0.8);">
+                    <circle cx="470" cy="320" r="25" fill="url(#gradWhite)" opacity="0.9"/>
+                    <g class="petal" style="animation-delay: 3.9s;">
+                        <path d="M470,320 L470,295" stroke="#E0E0E0" stroke-width="8" stroke-linecap="round"/>
+                        <path d="M470,320 L490,335" stroke="#E0E0E0" stroke-width="8" stroke-linecap="round"/>
+                        <path d="M470,320 L450,335" stroke="#E0E0E0" stroke-width="8" stroke-linecap="round"/>
+                    </g>
+                    <circle cx="470" cy="320" r="8" fill="#B3E5FC"/>
+                </g>
+
+                <!-- Ribbon/Bow -->
+                <g class="flower-bloom" style="animation-delay: 4.2s; transform-origin: 400px 650px;">
+                    <path d="M400,650 C380,630 360,640 350,650 C370,670 390,660 400,650" fill="#87CEEB" filter="url(#softGlow)"/>
+                    <path d="M400,650 C420,630 440,640 450,650 C430,670 410,660 400,650" fill="#87CEEB" filter="url(#softGlow)"/>
+                    <circle cx="400" cy="650" r="10" fill="#4FC3F7"/>
+                    <path d="M400,650 Q400,680 400,700" stroke="#29B6F6" stroke-width="6" fill="none"/>
+                    <path d="M400,660 Q380,690 370,720" stroke="#4FC3F7" stroke-width="4" fill="none" opacity="0.8"/>
+                    <path d="M400,660 Q420,690 430,720" stroke="#4FC3F7" stroke-width="4" fill="none" opacity="0.8"/>
+                </g>
+
+                <!-- THE RING - Center Piece -->
+                <g class="ring-appear" transform="translate(400, 280)">
+                    <!-- Outer Glow -->
+                    <circle cx="0" cy="0" r="40" fill="none" stroke="rgba(255,215,0,0.3)" stroke-width="15" filter="url(#strongGlow)"/>
+                    
+                    <!-- Ring Band -->
+                    <ellipse cx="0" cy="0" rx="35" ry="35" fill="none" stroke="url(#gradGold)" stroke-width="8" filter="url(#softGlow)" class="glow-pulse"/>
+                    
+                    <!-- Ring Detail -->
+                    <ellipse cx="0" cy="0" rx="28" ry="28" fill="none" stroke="#B8860B" stroke-width="2"/>
+                    
+                    <!-- Diamond Setting -->
+                    <path d="M0,-35 L-10,-50 L0,-60 L10,-50 Z" fill="#E0F7FA" stroke="#B0E0E6" stroke-width="1" filter="url(#strongGlow)"/>
+                    <path d="M-10,-50 L0,-40 L10,-50 L0,-60 Z" fill="rgba(255,255,255,0.8)"/>
+                    
+                    <!-- Diamond Facets -->
+                    <path d="M0,-60 L-5,-55 L0,-50 L5,-55 Z" fill="white" opacity="0.9"/>
+                    <path d="M0,-50 L-5,-55 L-3,-48 Z" fill="#B0E0E6" opacity="0.6"/>
+                    <path d="M0,-50 L5,-55 L3,-48 Z" fill="#87CEEB" opacity="0.6"/>
+                    
+                    <!-- Sparkles around ring -->
+                    <g class="sparkle" transform="translate(-50,-20)">
+                        <path d="M0,-10 L2,-2 L10,0 L2,2 L0,10 L-2,2 L-10,0 L-2,-2 Z" fill="white" filter="url(#strongGlow)"/>
+                    </g>
+                    <g class="sparkle" transform="translate(50,-30)">
+                        <path d="M0,-8 L1.5,-1.5 L8,0 L1.5,1.5 L0,8 L-1.5,1.5 L-8,0 L-1.5,-1.5 Z" fill="white" filter="url(#strongGlow)"/>
+                    </g>
+                    <g class="sparkle" transform="translate(0,50)">
+                        <path d="M0,-12 L2.5,-2.5 L12,0 L2.5,2.5 L0,12 L-2.5,2.5 L-12,0 L-2.5,-2.5 Z" fill="#FFD700" filter="url(#strongGlow)"/>
+                    </g>
+                    <g class="sparkle" transform="translate(-40,30)">
+                        <path d="M0,-6 L1,-1 L6,0 L1,1 L0,6 L-1,1 L-6,0 L-1,-1 Z" fill="white" filter="url(#softGlow)"/>
+                    </g>
+                    <g class="sparkle" transform="translate(40,30)">
+                        <path d="M0,-6 L1,-1 L6,0 L1,1 L0,6 L-1,1 L-6,0 L-1,-1 Z" fill="white" filter="url(#softGlow)"/>
+                    </g>
+                </g>
+
+                <!-- Text Reveal -->
+                <text x="400" y="600" text-anchor="middle" fill="white" font-family="'Playfair Display', serif" font-size="28" opacity="0" filter="url(#softGlow)">
+                    <animate attributeName="opacity" from="0" to="1" dur="2s" begin="5s" fill="freeze"/>
+                    <animate attributeName="opacity" values="1;0.8;1" dur="3s" repeatCount="indefinite"/>
+                    Ask about this flower Bouquet from Nimsi
+                </text>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p class="footer-text">Made with <span style="color: #ff6b9d; animation: heartBeat 1s infinite;">❤️</span> by Pamith Nimsitha for Nadewmi Methnara</p>
+            <p style="opacity: 0.8; font-size: 0.9rem;">© 2026 | Forever & Always</p>
+        </div>
+    </footer>
+
+    <script>
+        // Password Protection - Change password here if needed
+        const CORRECT_PASSWORD = "20070622";
+        
+        // Video Logic
+        const videoOverlay = document.getElementById('video-intro-overlay');
+        const introVideo = document.getElementById('intro-video');
+
+        function checkPassword() {
+            const input = document.getElementById('password-input').value;
+            const errorMsg = document.getElementById('error-msg');
+            const passwordOverlay = document.getElementById('password-overlay');
+            
+            if (input === CORRECT_PASSWORD) {
+                // 1. Hide Password Overlay
+                passwordOverlay.style.opacity = '0';
+                passwordOverlay.style.transition = 'opacity 0.8s ease';
+                
+                setTimeout(() => {
+                    passwordOverlay.style.display = 'none';
+                    
+                    // 2. Show Video Overlay
+                    videoOverlay.style.display = 'flex';
+                    
+                    // Trigger reflow to ensure transition works
+                    void videoOverlay.offsetWidth; 
+                    
+                    // 3. Play Video
+                    introVideo.play().catch(e => {
+                        console.log("Autoplay prevented by browser, waiting for interaction or showing content directly.");
+                        // If autoplay fails (common on mobile), skip to content
+                        endVideoIntro();
+                    });
+
+                }, 800);
+
+            } else {
+                errorMsg.classList.add('show');
+                document.getElementById('password-input').value = '';
+                setTimeout(() => {
+                    errorMsg.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        function endVideoIntro() {
+            // Fade out video
+            videoOverlay.style.opacity = '0';
+            
+            // Wait for fade transition to finish, then hide completely
+            setTimeout(() => {
+                videoOverlay.style.display = 'none';
+                introVideo.pause();
+                introVideo.currentTime = 0;
+            }, 1500); // Match CSS transition time
+        }
+
+        // Listen for video end
+        introVideo.addEventListener('ended', endVideoIntro);
+
+        // Allow Enter key to submit password
+        document.getElementById('password-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+    </script>
+
+</body>
+</html>
